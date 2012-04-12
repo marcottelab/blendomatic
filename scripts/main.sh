@@ -7,10 +7,10 @@ abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
 base_path="/project/marcotte/MSblendomatic"
 blendo_path="$base_path/blendomatic"
 src_path="$base_path/src.MS"
-#scripts_path="$blendo_path/scripts"
+scripts_path="$blendo_path/scripts"
 #### debug mode ####
-scripts_path=$(abspath "../../scripts")
-set -x
+#scripts_path=$(abspath "../../scripts")
+#set -x
 searches=( tide msgfdb inspect ) #inspect )
 ########
 base_work_dir=$(pwd)
