@@ -5,8 +5,10 @@ blendo_path=${args[0]}
 proj_path=${args[1]}
 db_file=${args[2]}
 
+# prepare db
 java -Xmx5000M -cp $blendo_path/src.MS/MSGFDB/current/MSGFDB.jar msdbsearch.BuildSA -d $db_file -tda 0
 
+# generate msgfdb search run script and run it
 curr_dir=$(pwd)
 cd $proj_path
 python $blendo_path/MS-toolbox/bin/prepare-MSGFDB.py

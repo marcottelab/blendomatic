@@ -1,5 +1,6 @@
 #! /bin/bash
-usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <fdr>"
+usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <out_path> <fdr> [<onesearch>]\nEx: main.sh sample01 ../../sample01mzXMLfiles ../Hs.fasta . 0.01"
+
 # run from where you want target directory made
 
 abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
@@ -7,25 +8,29 @@ abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
 base_path="/project/marcotte/MSblendomatic"
 blendo_path="$base_path/blendomatic"
 src_path="$base_path/src.MS"
-scripts_path="$blendo_path/scripts"
+#scripts_path="$blendo_path/scripts"
 #### debug mode ####
-#scripts_path=$(abspath "../../scripts")
+scripts_path=$(abspath "../../scripts")
 #set -x
 searches=( tide msgfdb inspect ) #inspect )
 ########
 base_work_dir=$(pwd)
 
 args=("$@")
-if [ ${#args[@]} -lt 4 ]; then
+if [ ${#args[@]} -lt 5 ]; then
     echo $usage
     exit 1
 fi
 proj_name=${args[0]}
 mzXML_path=$(abspath ${args[1]})
 db_source=$(abspath ${args[2]})
-fdr=${args[3]}
-
-# helpers
+out_path=$(abspath ${args[3]})
+fdr=${args[4]}
+onesearch=${args[5]}
+if [ $onesearch != '' ]; then
+    searches=( $onesearch )
+fi
+echo "Blendomatic: using searches: "$onesearch
 
 # make new project directory with appropriate mstb.conf changes
 proj_path=$base_work_dir/$proj_name
