@@ -27,10 +27,14 @@ db_source=$(abspath ${args[2]})
 out_path=$(abspath ${args[3]})
 fdr=${args[4]}
 onesearch=${args[5]}
+secondsearch=${args[6]}
 if [ $onesearch != '' ]; then
     searches=( $onesearch )
+    if [ $secondsearch != '' ]; then
+        searches=( $onesearch $secondsearch )
+    fi
 fi
-echo "Blendomatic: using searches: "$onesearch
+echo "Blendomatic: using searches: "$onesearch$secondsearch
 
 # make new project directory with appropriate mstb.conf changes
 proj_path=$base_work_dir/$proj_name
