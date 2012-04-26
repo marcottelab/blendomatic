@@ -41,7 +41,6 @@ do
             # Tide is missing spectrum ids--handle separately
             filebase=$(basename "$bestfile")
             filebase="${filebase%%.*}"
-            echo "filebase: $filebase"
             sed "s/^000/${filebase}/g" $bestfile >> $comb_file
         fi
     done

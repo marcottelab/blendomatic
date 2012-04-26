@@ -1,5 +1,5 @@
 #! /bin/bash
-usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <out_path> <fdr> [<onesearch>]\nEx: main.sh sample01 ../../sample01mzXMLfiles ../Hs.fasta . 0.01"
+usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <out_path> <fdr> <search1_search2_..>  Ex: main.sh sample01 ../../sample01mzXMLfiles ../Hs.fasta . 0.01"
 
 # run from where you want target directory made
 
@@ -8,11 +8,10 @@ abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
 base_path="/project/marcotte/MSblendomatic"
 blendo_path="$base_path/blendomatic"
 src_path="$base_path/src.MS"
-#scripts_path="$blendo_path/scripts"
+scripts_path="$blendo_path/scripts"
 #### debug mode ####
-scripts_path=$(abspath "../../scripts")
+#scripts_path=$(abspath "../../scripts")
 #set -x
-searches=( tide msgfdb inspect ) #inspect )
 ########
 base_work_dir=$(pwd)
 
@@ -26,15 +25,13 @@ mzXML_path=$(abspath ${args[1]})
 db_source=$(abspath ${args[2]})
 out_path=$(abspath ${args[3]})
 fdr=${args[4]}
-onesearch=${args[5]}
-secondsearch=${args[6]}
-if [ $onesearch != '' ]; then
-    searches=( $onesearch )
-    if [ $secondsearch != '' ]; then
-        searches=( $onesearch $secondsearch )
-    fi
+
+searches="tide inspect" #msgfdb not working on ada re: java issue
+if [ "x${args[5]}" != "x" ]; then
+    searches=${args[5]}
+    searches=${searches/_/ }
 fi
-echo "Blendomatic: using searches: "$onesearch$secondsearch
+echo "Blendomatic: using searches: "$searches
 
 # make new project directory with appropriate mstb.conf changes
 proj_path=$base_work_dir/$proj_name
@@ -81,7 +78,7 @@ db_basename=${db_basename%.*}
 sed -i s@DB_combined@${db_basename}@g $proj_path/mstb.conf
 
 # run searches
-for search in "${searches[@]}"
+for search in $searches
 do
     if [ $search = 'tide' ]; then
         echo "MSblendomatic: running tide"
