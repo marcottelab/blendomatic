@@ -73,6 +73,7 @@ cat $db_file_temp.reverse >> $db_file
 # use @ as separator to avoid path name ('/') regex issues
 sed -i s@project_name_replace@${proj_name}@g $proj_path/mstb.conf
 sed -i s@project_path_replace@${proj_path}@g $proj_path/mstb.conf
+sed -i s@resource_path@${base_path}@g $proj_path/mstb.conf
 db_basename=$(basename $db_file)
 db_basename=${db_basename%.*}
 sed -i s@DB_combined@${db_basename}@g $proj_path/mstb.conf
