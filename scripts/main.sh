@@ -29,7 +29,7 @@ fdr=${args[4]}
 searches="tide inspect" #msgfdb not working on ada re: java issue
 if [ "x${args[5]}" != "x" ]; then
     searches=${args[5]}
-    searches=${searches//_/ /} # the double // means do it to the whole line
+    searches=${searches//_/ } # the double // means do it to the whole line
 fi
 echo "Blendomatic: using searches: "$searches
 
