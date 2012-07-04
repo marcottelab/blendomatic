@@ -1,9 +1,17 @@
 #! /bin/bash
-usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <out_path> <fdr> <search1_search2_..>  Ex: main.sh sample01 ../../sample01mzXMLfiles ../Hs.fasta . 0.01"
+usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <fdr> <search1_search2_..>  [skip_blend=0] Ex: main.sh sample01 ../../sample01mzXMLfiles ../Hs.fasta . 0.01"
 
 # run from where you want target directory made
 
 abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
+function confirm_proceed(){
+    read -p "Directory already exists. Continue? (y/n): " -n 1 -r
+    if [[ $REPLY =~ ^[Nn]$ ]]
+    then
+        echo ''
+        exit 1
+    fi
+}
 
 base_path=$(dirname $(dirname $(dirname $(abspath $0))))
 blendo_path="$base_path/blendomatic"
@@ -23,12 +31,13 @@ fi
 proj_name=${args[0]}
 mzXML_path=$(abspath ${args[1]})
 db_source=$(abspath ${args[2]})
-out_path=$(abspath ${args[3]})
-fdr=${args[4]}
+out_path=$base_work_dir
+fdr=${args[3]}
+skip_blend=${args[5]}
 
 searches="tide inspect" #msgfdb not working on ada re: java issue
-if [ "x${args[5]}" != "x" ]; then
-    searches=${args[5]}
+if [ "x${args[4]}" != "x" ]; then
+    searches=${args[4]}
     searches=${searches//_/ } # the double // means do it to the whole line
 fi
 echo "Blendomatic: using searches: "$searches
@@ -36,8 +45,7 @@ echo "Blendomatic: using searches: "$searches
 # make new project directory with appropriate mstb.conf changes
 proj_path=$base_work_dir/$proj_name
 if [ -d $proj_name ]; then
-    echo "exiting: directory ${proj_name} already exists."
-    exit 1
+    confirm_proceed
 fi
 mkdir $proj_path
 cp -r $blendo_path/project_template/* $proj_path
@@ -78,6 +86,10 @@ db_basename=$(basename $db_file)
 db_basename=${db_basename%.*}
 sed -i s@DB_combined@${db_basename}@g $proj_path/mstb.conf
 
+# Only has an effect on the tacc servers
+module load python
+module load java
+
 # run searches
 for search in $searches
 do
@@ -99,6 +111,11 @@ for bestfile in $(ls $proj_path/*/*_best)
 do
     ln -s $(abspath $bestfile) $proj_path/bestfiles/
 done
+
+if [ $skip_blend = 1 ]; then
+    echo "skipping blend"
+    exit 1
+fi
 
 # run msblender to get spcount file output
 echo "MSblendomatic: preparing to run MSblender"
