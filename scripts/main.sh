@@ -5,7 +5,7 @@ usage="Usage: main.sh <proj_name> <mzXML_path> <db_source> <out_path> <fdr> <sea
 
 abspath(){ python -c "import os.path; print os.path.abspath('$1')" ; }
 
-base_path="/project/marcotte/MSblendomatic"
+base_path=$(dirname $(dirname $(dirname $(abspath $0))))
 blendo_path="$base_path/blendomatic"
 src_path="$base_path/src.MS"
 scripts_path="$blendo_path/scripts"
