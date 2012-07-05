@@ -52,8 +52,11 @@ cp -r $blendo_path/project_template/* $proj_path
 
 # move mzXML and fasta DB sequence files into place
 if [ -d $mzXML_path ]; then
-    echo "using all .mzXML files from $mzXML_path"
-    ln -s $mzXML_path/*.mzXML $proj_path/mzXML/
+    echo "Using all .mzXML files from $mzXML_path"
+    for mzx in $(ls $mzXML_path/*.mzXML)
+    do
+        ln -s $(abspath $mzx) $proj_path/mzXML/
+    done
 elif [ -f $mzXML_path ]; then
     echo "using mzXML file: $mzXML_path"
     ln -s $mzXML_path $proj_path/mzXML/
