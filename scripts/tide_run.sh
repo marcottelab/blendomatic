@@ -51,5 +51,5 @@ done
 #cd $proj_path/tide
 cd $proj_path/tide
 echo $(pwd)
-source $blendo_path/MSblender/pre/tide_hit_list.sh
+source $blendo_path/MSblender/pre/tide_pepxml-to-hit_list.sh
 cd $curr_dir
