@@ -36,7 +36,8 @@ done
 # Convert .results output to .pep.xml
 RESULTS="$exec_path/tide-results"
 AUX="${PROT/_miss2.protidx/.fasta.auxlocs}"
-SUFFIX=".results.pepxml"
+SUFFIX=".results"
+#SUFFIX=".results.pepxml"
 for SR in $(ls $proj_path/tide/*.spectrumrecords)
 do
  RES=${SR/.spectrumrecords/.tideres}
@@ -44,7 +45,7 @@ do
  OUT=$proj_path/tide/${OUT/.spectrumrecords/}$SUFFIX
  $RESULTS --proteins=$PROT --spectra=$SR --results_file=$RES --out_filename=$OUT --out_format=pep.xml --aux_locations=$AUX --show_all_proteins=True
  #They attach another extension, which messes up following steps
- mv $OUT.pep.xml $OUT
+# mv $OUT.pep.xml $OUT
 done
 
 # Create hit_list for msblender input from .pep.xml
