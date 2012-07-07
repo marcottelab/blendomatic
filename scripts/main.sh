@@ -108,17 +108,17 @@ do
     fi
 done
 
+if [ $skip_blend = 1 ]; then
+    echo "skipping blend"
+    exit 1
+fi
+
 # move search output _best files into place
 mkdir $proj_path/bestfiles
 for bestfile in $(ls $proj_path/*/*_best)
 do
     ln -s $(abspath $bestfile) $proj_path/bestfiles/
 done
-
-if [ $skip_blend = 1 ]; then
-    echo "skipping blend"
-    exit 1
-fi
 
 # run msblender to get spcount file output
 echo "MSblendomatic: preparing to run MSblender"
