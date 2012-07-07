@@ -16,5 +16,5 @@ echo '#$ -l h_rt='${hours}':00:00' >> $submit_script
 echo '#$ -q '${qtype} >> $submit_script #long
 cat tacc/launcher_body.sge >> $submit_script
 
-#qsub < $submit_script
-cat $submit_script
+qsub < $submit_script
+#cat $submit_script
