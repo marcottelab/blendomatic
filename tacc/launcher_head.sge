@@ -1,0 +1,27 @@
+#!/bin/csh
+#
+# Simple SGE script for submitting multiple serial
+# jobs (e.g. parametric studies) using a script wrapper
+# to launch the jobs.
+#
+# To use, build the launcher executable and your
+# serial application(s) and place them in your WORKDIR
+# directory.  Then, edit the CONTROL_FILE to specify 
+# each executable per process.
+#-------------------------------------------------------
+#-------------------------------------------------------
+# 
+#         <------ Setup Parameters ------>
+#
+#!/bin/bash
+#$ -V                   # Inherit the submission environment
+#$ -cwd                 # Start job in submission directory
+#$ -j y                 # Combine stderr and stdout
+#$ -o $JOB_NAME.o$JOB_ID
+#$ -M borgeson@utexas.edu
+#$ -m e                # Email at End of job
+#$ -P data
+#set -x                  # Echo commands, use "set echo" with csh
+#$ -pe 8way 8
+#   <------ You MUST Specify a Project String ----->
+#------------------------------------------------------
