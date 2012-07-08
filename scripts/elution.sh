@@ -47,6 +47,7 @@ do
     if [ ${#bestfiles} -gt 0 ]; then
         # -e enables special characters, needed for tab and maybe newline too
         echo -e "${search}\t${comb_file}" >> $shortname.conf
+        echo 'search '$search': '${#bestfiles}' files' >> $shortname.bestcount
     fi
 done
 
@@ -57,4 +58,5 @@ $msb/src/msblender $shortname.msblender_in
 $msb/post/make-spcount.py $shortname.msblender_in.msblender_out $shortname.prot_list $fdr_num
 $msb/post/filter-msblender.py $shortname.msblender_in.msblender_out $fdr_string > $shortname.filter
 echo "MSblender automagic: DONE.  Results summary:"
+cat $shortname.bestcount
 tail -n 1 $shortname.filter
