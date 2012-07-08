@@ -17,5 +17,5 @@ do
     do 
         echo "sleep 180; $f/scripts/run-inspect.sh" >> $plist
     done
-    ./tacc/launch.sh $name 1 normal
+    ./tacc/launch.sh $name 24 long
 done
