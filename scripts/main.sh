@@ -117,7 +117,7 @@ fi
 mkdir $proj_path/bestfiles
 for bestfile in $(ls $proj_path/*/*_best)
 do
-    ln -s $(abspath $bestfile) $proj_path/bestfiles/
+    ln -sf $(abspath $bestfile) $proj_path/bestfiles/
 done
 
 # run msblender to get spcount file output
