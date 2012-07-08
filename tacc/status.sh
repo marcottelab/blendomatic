@@ -12,6 +12,7 @@ search
 echo "*mzXML *in *out *tmp *best"
 for f in $(ls -d ${sp}*/); do 
     if [ $search = "tide" ]; then
+        echo $f 
         find $f/tide/ -type f | rev | cut -d . -f1 | rev | sort | uniq -ic | sort -rn
     else
         echo $f $(ls $f/mzXML/*mzXML | wc -l) $(ls $f/$search/*in 2>/dev/null | wc -l) $(ls $f/$search/*out 2> /dev/null | wc -l) $(ls $f/$search/*tmp 2> /dev/null | wc -l) $(ls $f/$search/*best 2> /dev/null | wc -l)
