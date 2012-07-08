@@ -14,6 +14,7 @@ cp tacc/launcher_head.sge $submit_script
 echo '#$ -N '$name >> $submit_script
 echo '#$ -l h_rt='${hours}':00:00' >> $submit_script
 echo '#$ -q '${qtype} >> $submit_script #long
+echo 'setenv CONTROL_FILE   tacc/scripts/submit/paramlist.'$name >> $submit_script
 cat tacc/launcher_body.sge >> $submit_script
 
 qsub < $submit_script

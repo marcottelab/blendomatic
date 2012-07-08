@@ -9,7 +9,6 @@
 #
 module load launcher
 setenv EXECUTABLE     $TACC_LAUNCHER_DIR/launcher      
-setenv CONTROL_FILE   paramlist
 setenv WORKDIR        .
 # 
 # Variable description:
