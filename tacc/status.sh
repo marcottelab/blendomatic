@@ -7,8 +7,6 @@ fi
 search=$1
 sp=$2
 
-
-search
 echo "*mzXML *in *out *tmp *best"
 for f in $(ls -d ${sp}*/); do 
     if [ $search = "tide" ]; then
