@@ -60,3 +60,4 @@ $msb/post/filter-msblender.py $shortname.msblender_in.msblender_out $fdr_string 
 echo "MSblender automagic: DONE.  Results summary:"
 cat $shortname.bestcount
 tail -n 1 $shortname.filter
+echo "Total union proteins: "$(wc -l $shortname.spcount*)

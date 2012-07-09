@@ -22,6 +22,5 @@
 #$ -m e                # Email at End of job
 #$ -P data
 #set -x                  # Echo commands, use "set echo" with csh
-#$ -pe 4way 16
 #   <------ You MUST Specify a Project String ----->
 #------------------------------------------------------
