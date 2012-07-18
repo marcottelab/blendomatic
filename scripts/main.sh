@@ -24,7 +24,7 @@ scripts_path="$blendo_path/scripts"
 base_work_dir=$(pwd)
 
 args=("$@")
-if [ ${#args[@]} -lt 5 ]; then
+if [ ${#args[@]} -lt 4 ]; then
     echo $usage
     exit 1
 fi
