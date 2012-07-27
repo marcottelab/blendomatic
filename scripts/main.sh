@@ -89,10 +89,6 @@ db_basename=$(basename $db_file)
 db_basename=${db_basename%.*}
 sed -i s@DB_combined@${db_basename}@g $proj_path/mstb.conf
 
-# Only has an effect on the tacc servers
-module load python
-module load java
-
 # run searches
 for search in $searches
 do

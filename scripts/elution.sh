@@ -47,7 +47,7 @@ do
     if [ ${#bestfiles} -gt 0 ]; then
         # -e enables special characters, needed for tab and maybe newline too
         echo -e "${search}\t${comb_file}" >> $shortname.conf
-        echo 'search '$search': '${#bestfiles}' files' >> $shortname.bestcount
+        echo 'search '$search': '$(echo $bestfiles | wc -w)' files' >> $shortname.bestcount
     fi
 done
 
