@@ -17,5 +17,5 @@ do
     do 
         echo "sleep 600; $f/scripts/run-inspect.sh" >> $plist
     done
-    ./tacc/launch.sh $name 24 long '4way 32'
+    ./tacc/launch.sh $name 24 long '8way 32'
 done
