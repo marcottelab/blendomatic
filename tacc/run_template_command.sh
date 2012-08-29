@@ -1,6 +1,6 @@
 #!/bin/bash
 usage="usage: run_template_command.sh <command> <jobname> <numhours> 
-<qtype{long|normal}> <procs {4/8way 8/16/32}>"
+<qtype{long|normal}> <procs {4/8way_8/16/32}>"
 args=("$@")
 if [ ${#args[@]} -lt 5 ]; then
     echo $usage
@@ -10,7 +10,7 @@ command=${args[0]}
 name=${args[1]}
 hours=${args[2]}
 qtype=${args[3]}
-procs=${args[4]}
+procs=${args[4]/_/ }
 submit_script='tacc/scripts/submit/template_submit.sh'
 cp tacc/scripts/template.sh $submit_script
 echo '#$ -N '$name >> $submit_script
