@@ -13,9 +13,9 @@ do
     plist=tacc/scripts/submit/paramlist.$name
     rm $plist
     echo "~/git/blendomatic/scripts/main.sh $f mzXML/$f ${f:0:2}_longclean 0.01 inspect 1" >> $plist
-    for i in $(seq 15)
+    for i in $(seq 31)
     do 
-        echo "sleep 600; $f/scripts/run-inspect.sh" >> $plist
+        echo "sleep 300; $f/scripts/run-inspect.sh" >> $plist
     done
     ./tacc/launch.sh $name 24 long '8way 32'
 done
