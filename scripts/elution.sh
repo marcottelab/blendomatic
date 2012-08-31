@@ -51,13 +51,13 @@ do
     fi
 done
 
-echo "MSblender automagic: creating msblender_in"
+echo "Blendomatic: creating msblender_in"
 $msb/pre/make-msblender_in.py $shortname.conf 
-echo "MSblender automagic: running MSblender"
+echo "Blendomatic: running MSblender"
 $msb/src/msblender $shortname.msblender_in 
 $msb/post/make-spcount.py $shortname.msblender_in.msblender_out $shortname.prot_list $fdr_num
 $msb/post/filter-msblender.py $shortname.msblender_in.msblender_out $fdr_string > $shortname.filter
-echo "MSblender automagic: DONE.  Results summary:"
+echo "Blendomatic: DONE.  Results summary:"
 cat $shortname.bestcount
 tail -n 1 $shortname.filter
 echo "Total union proteins: "$(wc -l $shortname.spcount*)

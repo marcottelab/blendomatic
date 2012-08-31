@@ -73,7 +73,7 @@ else
 fi
 
 # create proper DB combined file with decoys
-echo "MSblendomatic: setting up combined target/decoy db"
+echo "Blendomatic: setting up combined target/decoy db"
 db_file_temp=$proj_path/DB/$(basename $db_source)
 python $base_path/MS-toolbox/bin/fasta-reverse.py $db_file_temp
 db_file=${db_file_temp%.*}_combined.fasta
@@ -93,13 +93,13 @@ sed -i s@DB_combined@${db_basename}@g $proj_path/mstb.conf
 for search in $searches
 do
     if [ $search = 'tide' ]; then
-        echo "MSblendomatic: running tide"
+        echo "Blendomatic: running tide"
         source $scripts_path/tide_run.sh $base_path $proj_path $db_file
     elif [ $search = 'msgfdb' ]; then
-        echo "MSblendomatic: running MSGFDB"
+        echo "Blendomatic: running MSGFDB"
         source $scripts_path/msgfdb_run.sh $base_path $proj_path $db_file
     elif [ $search = 'inspect' ]; then
-        echo "MSblendomatic: running Inspect"
+        echo "Blendomatic: running Inspect"
         source $scripts_path/inspect_run.sh $base_path $proj_path $db_file
     fi
 done
@@ -117,7 +117,7 @@ do
 done
 
 # run msblender to get spcount file output
-echo "MSblendomatic: preparing to run MSblender"
+echo "Blendomatic: preparing to run MSblender"
 curr_dir=$(pwd)
 cd $proj_path
 source $scripts_path/elution.sh $proj_path/bestfiles $base_path/MSblender $proj_name "" $fdr
