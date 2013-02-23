@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -o $SLURM_JOB_NAME.o$SLURM_JOB_ID
+#SBATCH -o ${SLURM_JOB_NAME}.o${SLURM_JOBID}
 #SBATCH --mail-user=borgeson@utexas.edu
 #SBATCH --mail-type=END                # Email at End of job
 #SBATCH -p normal     # on stampede always normal queue
