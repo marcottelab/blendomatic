@@ -17,10 +17,11 @@
 data/
 tools/
 docs/
+exp/
+tacc/scripts/submit/
 
 # OS files
 *.DS_Store*
 
 # directories that keep showing up
-exp/12-03-elution/convert/
-exp/12-03-tox/
+
