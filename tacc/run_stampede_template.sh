@@ -15,6 +15,7 @@ cp tacc/scripts/stampede_template.sh $submit_script
 echo '#SBATCH -J '$name >> $submit_script
 echo '#SBATCH -t '$hours':00:00' >> $submit_script
 echo '#SBATCH -n '$tasks >> $submit_script
+echo '#SBATCH -o '$name'-%j.o' >> $submit_script
 echo $command >> $submit_script
 sbatch $submit_script
 #cat $submit_script
