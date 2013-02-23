@@ -3,6 +3,8 @@
 ._*
 .#*
 *#
+*.swp
+*.swo
 
 # data etc
 *.mat
