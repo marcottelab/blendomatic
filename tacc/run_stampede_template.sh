@@ -4,7 +4,7 @@ usage="usage: run_template_command.sh <command> <jobname> <numhours>
 args=("$@")
 if [ ${#args[@]} -lt 4 ]; then
     echo $usage
-    exit 1
+    return 1
 fi
 command=${args[0]}
 name=${args[1]}
