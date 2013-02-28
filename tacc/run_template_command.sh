@@ -12,6 +12,8 @@ hours=${args[2]}
 qtype=${args[3]}
 procs=${args[4]/_/ }
 submit_script='tacc/scripts/submit/template_submit.sh'
+module load python
+module load java
 cp tacc/scripts/template.sh $submit_script
 echo '#$ -N '$name >> $submit_script
 echo '#$ -l h_rt='${hours}':00:00' >> $submit_script

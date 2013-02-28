@@ -12,7 +12,7 @@ do
     name=i${f:0:1}${f: -6}
     plist=tacc/scripts/submit/paramlist.$name
     rm $plist
-    echo "~/git/blendomatic/scripts/main.sh $f mzXML/$f ${f:0:2}_longclean 0.01 inspect 1" >> $plist
+    echo "~/git/blendomatic/scripts/main.sh $f mzXML/$f ${f:0:2}.fasta 0.01 inspect 1" >> $plist
     for i in $(seq 31)
     do 
         echo "sleep 300; $f/scripts/run-inspect.sh" >> $plist
