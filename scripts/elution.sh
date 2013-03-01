@@ -17,10 +17,10 @@ fdr_string="0"${fdr_num#*.}
 searches=( Tide Inspect MSGFDB )
 extensions=( xcorr_hit_list_best MQscore_hit_list_best logSpecProb_hit_list_best )
 
-#if [ -d $shortname ]; then
-    #echo "exiting: directory exists."
-    #exit 1
-#fi
+if [ -d $shortname ]; then
+    echo "exiting: directory exists. does not handle merging with existing output."
+    exit 1
+fi
 
 mkdir $shortname
 cd $shortname
