@@ -14,6 +14,7 @@ shortname=${args[2]}
 match=${args[3]}
 fdr_num=${args[4]}
 fdr_string="0"${fdr_num#*.}
+fdr_string_out=${fdr_string}"0"
 searches=( Tide Inspect MSGFDB )
 extensions=( xcorr_hit_list_best MQscore_hit_list_best logSpecProb_hit_list_best )
 
@@ -57,7 +58,16 @@ echo "Blendomatic: running MSblender"
 $msb/src/msblender $shortname.msblender_in 
 $msb/post/make-spcount.py $shortname.msblender_in.msblender_out $shortname.prot_list $fdr_num
 $msb/post/filter-msblender.py $shortname.msblender_in.msblender_out $fdr_string > $shortname.filter
+python $msb/post/msblender_out-to-pep_count.py $shortname.msblender_in.msblender_out $fdr_num
 echo "Blendomatic: DONE.  Results summary:"
 cat $shortname.bestcount
 tail -n 1 $shortname.filter
 echo "Total union proteins: "$(wc -l $shortname.spcount*)
+
+# protein count with unique peptides only, and compute pairwise scores
+python ~/git/complex/protein_counts.py $shortname.pep_list_FDR${fdr_string_out} True
+protcounts=$shortname.prot_count_uniqpeps_FDR${fdr_string_out}
+python ~/git/complex/score.py $protcounts poisson 1000
+python ~/git/complex/scripts/compactify.py $protcounts.corr_poisson f2
+~/git/complex/scripts/wcc.sh $protcounts 1
+python ~/git/complex/scripts/compactify.py $protcounts.T.wcc_width1 f2
