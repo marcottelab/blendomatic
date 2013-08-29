@@ -6,7 +6,7 @@ proj_path=${args[1]}
 db_file=${args[2]}
 
 # prepare db
-java -Xmx5000M -cp $blendo_path/src.MS/MSGFDB/current/MSGFDB.jar msdbsearch.BuildSA -d $db_file -tda 0
+java -Xmx2000M -cp $blendo_path/src.MS/MSGFDB/current/MSGFDB.jar msdbsearch.BuildSA -d $db_file -tda 0
 
 # generate msgfdb search run script and run it
 curr_dir=$(pwd)
