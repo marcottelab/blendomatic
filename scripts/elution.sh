@@ -65,7 +65,7 @@ tail -n 1 $shortname.filter
 echo "Total union proteins: "$(wc -l $shortname.spcount*)
 
 # protein count with unique peptides only, and compute pairwise scores
-sp=${basename %%"_"*}
+sp=${basename%%"_"*}
 pep2prots=$(ls ../../$sp.pepDict) # returns blank and so skipped if not found
 python ~/git/complex/protein_counts.py $shortname.pep_list_FDR${fdr_string_out}
 True $pep2prots
