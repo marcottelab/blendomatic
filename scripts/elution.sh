@@ -68,7 +68,7 @@ echo "Total union proteins: "$(wc -l $shortname.spcount*)
 sp=${shortname%%"_"*}
 pep2prots=$(ls ../../$sp.pepDict) # returns blank and so skipped if not found
 python ~/git/complex/protein_counts.py $shortname.pep_count_FDR${fdr_string} True $pep2prots
-protcounts=$shortname.prot_count_uniqpeps2_FDR${fdr_string_out}
+protcounts=$shortname.prot_count_uniqpeps2_FDR${fdr_string}
 python ~/git/complex/score.py $protcounts poisson 1000
 python ~/git/complex/scripts/compactify.py $protcounts.corr_poisson f2
 ~/git/complex/scripts/wcc.sh $protcounts 1
